@@ -4,10 +4,10 @@ const CategoryIcons = {
   "Web Development": (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-app-window-mac text-[var(--sec)]"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="M6 8h.01"/><path d="M10 8h.01"/><path d="M14 8h.01"/></svg>
   ),
-  "AI Development": (
+  "Custom Web Applications": (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-tablet-smartphone text-[var(--sec)]"><rect width="10" height="14" x="3" y="8" rx="2"/><path d="M5 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2h-2.4"/><path d="M8 18h.01"/></svg>
   ),
-  "Web Applications / Dashboard": (
+  "AI Development": (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-spline-pointer text-[var(--sec)]"><path d="M12.034 12.681a.498.498 0 0 1 .647-.647l9 3.5a.5.5 0 0 1-.033.943l-3.444 1.068a1 1 0 0 0-.66.66l-1.067 3.443a.5.5 0 0 1-.943.033z"/><path d="M5 17A12 12 0 0 1 17 5"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="19" r="2"/></svg>
   ),
 };
@@ -17,34 +17,33 @@ const SkillsList = () => {
 
   const skills = {
     "Web Development": [
-      "Responsive websites from landing pages to multi-page builds",
-      "Custom modern UI with reusable components",
-      "Complex interfaces and advanced functionality",
-      "CMS-powered content management",
-      "Third-party services and API integrations",
-      "Contact forms and conversion-focused CTA sections",
-      "Interactive animations and user interactions",
-      "Production deployment and basic SEO setup",
+      "Business websites",
+      "Landing pages",
+      "Marketing websites",
+      "Responsive UI",
+      "Contact & lead forms",
+      "Third-party integrations",
+      "Deployment & basic SEO",
     ],
+
+    "Custom Web Applications": [
+      "Dashboards & admin panels",
+      "Client portals",
+      "SaaS MVPs",
+      "Authentication & user roles",
+      "Database-driven applications",
+      "REST APIs",
+      "Custom business workflows"
+    ],
+
     "AI Development": [
-      "OpenAI API and multiple AI integrations",
-      "AI chatbots and assistants connected to business data",
-      "AI-powered features in existing applications",
-      "AI document processing",
-      "AI workflows from simple automation to complex multi-step systems",
-      "RAG and knowledge systems",
-      "AI agents with external tools",
-      "Machine learning models",
-    ],
-    "Web Applications / Dashboard": [
-      "CRUD applications and admin panels",
-      "Dashboards from simple interfaces to complex multi-screen systems",
-      "Authentication, user roles, and client portals",
-      "Database-backed application development",
-      "API and external service integrations",
-      "SaaS MVPs with payments and subscription features",
-      "Substantial backend functionality and business logic",
-      "Application deployment and production setup",
+      "AI-powered features",
+      "AI chat interfaces",
+      "AI API integrations",
+      "Document & content processing",
+      "AI-assisted workflows",
+      "Business process automation",
+      "AI-powered SaaS features"
     ],
   };
 
