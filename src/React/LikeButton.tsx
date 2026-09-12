@@ -19,15 +19,12 @@ const LikeButton = () => {
 
     // Listen for realtime updates from Firestore
     const likeDocRef = doc(db, "likes", "counter");
-    const unsubscribe = onSnapshot(
-      likeDocRef,
-      (docSnap) => {
-        if (docSnap.exists()) {
-          const currentLikes = docSnap.data().likes;
-          setLikes(Math.max(0, currentLikes));
-        }
-      },
-    );
+    const unsubscribe = onSnapshot(likeDocRef, (docSnap) => {
+      if (docSnap.exists()) {
+        const currentLikes = docSnap.data().likes;
+        setLikes(Math.max(0, currentLikes));
+      }
+    });
 
     return () => unsubscribe();
   }, []);

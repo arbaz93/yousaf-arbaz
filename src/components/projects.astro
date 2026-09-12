@@ -1,41 +1,45 @@
 ---
-
 interface Project {
   title: string;
   image: string;
   link: string;
   preview: string;
   status: string;
+  technologies?: string[];
 }
 
 const projects: Project[] = [
   {
-    title: "BuisnessFlow",
+    title: "BuisnessFlow AI",
     image: "https://placehold.co/600x400/1a1a1a/ffffff?text=Project+One",
     link: "#!",
     preview: "#!",
     status: "In Development",
+    technologies: ["React", "Node.js", "MongoDB"],
   },
   {
-     title: "FloorScape",
+    title: "FloorScape",
     image: "/projects/Floorscape.png",
     link: "https://github.com/arbaz93/FloorScape",
     preview: "#!",
-    status: "Deployed",
+    status: "AI-powered architectural visualization platform",
+    technologies: ["React", "Node.js", "MongoDB"],
   },
   {
     title: "Imageer",
     image: "/projects/Imageer.png",
     link: "https://github.com/arbaz93/Imageer",
     preview: "#!",
-    status: "Deployed",
+    status: "Full-stack image processing platform",
+    technologies: ["React", "Node.js", "MongoDB"],
   },
   {
-    title: "Swolnormous",
+    title: "Project 4",
     image: "/projects/fitness.jpeg",
-    link: "https://github.com/arbaz93/React-Fitness-App",
+    link: "https://placehold.co/600x400/1a1a1a/ffffff?text=Project+Four",
     preview: "#!",
     status: "Deployed",
+    technologies: ["React", "Node.js", "MongoDB"],
   },
 ];
 ---
@@ -48,7 +52,7 @@ const projects: Project[] = [
     <h2 class="text-lg text-[var(--sec)] mb-2 shiny-sec">My work</h2>
     <h3 class="text-4xl md:text-5xl font-medium mb-8">Projects</h3>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div class="grid grid-cols-1 min-889:grid-cols-2 gap-8">
       {
         projects.map((project) => (
           <div class="group">
@@ -67,9 +71,10 @@ const projects: Project[] = [
               </div>
               <div class="flex items-center px-3">
                 <div class="flex-grow">
-                  <h4 class="text-2xl font-semibold">{project.title}</h4>
-                  <span class="py-1 text-sm text-[var(--white-icon)]">
+                  <h4 class="text-lg sm:text-2xl font-semibold">{project.title}</h4>
+                  <span class="py-1 text-xs min-400:text-sm text-[var(--white-icon)]">
                     {project.status}
+                    
                   </span>
                 </div>
                 <div class="flex gap-2 ml-auto">
@@ -77,7 +82,8 @@ const projects: Project[] = [
                     target="_blank"
                     href={project.link}
                     aria-label="GitHub"
-                    class="size-14 flex justify-center items-center text-[var(--white-icon)] hover:text-white transition duration-300 ease-in-out border border-1 border-[var(--white-icon-tr)] p-3 rounded-xl bg-[#1414149c] hover:bg-[var(--white-icon-tr)]"
+                    title="GitHub"
+                    class="size-12 min-400:size-14 flex justify-center items-center text-[var(--white-icon)] hover:text-white transition duration-300 ease-in-out border border-1 border-[var(--white-icon-tr)] p-3 rounded-xl bg-[#1414149c] hover:bg-[var(--white-icon-tr)]"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -90,9 +96,10 @@ const projects: Project[] = [
                   </a>
                   <a
                     target="_blank"
+                    title="Live Preview"
                     href={project.preview}
                     aria-label="Preview"
-                    class="size-14 flex justify-center items-center text-[var(--white-icon)] hover:text-white transition duration-300 ease-in-out border border-1 border-[var(--white-icon-tr)] p-3 rounded-xl bg-[#1414149c] hover:bg-[var(--white-icon-tr)]"
+                    class="size-12 min-400:size-14 flex justify-center items-center text-[var(--white-icon)] hover:text-white transition duration-300 ease-in-out border border-1 border-[var(--white-icon-tr)] p-3 rounded-xl bg-[#1414149c] hover:bg-[var(--white-icon-tr)]"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

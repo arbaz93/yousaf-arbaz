@@ -3,6 +3,10 @@ export default {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
     extend: {
+      screens: {
+        'min-400': { min: '400px' },
+        'min-889': { min: '889px' },
+      },
       keyframes: {
         scaleAnim: {
           '0%': { transform: 'scale(1)' },
