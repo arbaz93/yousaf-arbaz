@@ -1,7 +1,3 @@
----
-const formspreeEndpoint = import.meta.env.PUBLIC_FORMSPREE_ENDPOINT;
----
-
 <section id="contact" class="w-full py-12 border-t border-[#ffffff10]">
   <div class="max-w-5xl mx-auto">
     <h2 class="text-lg text-[var(--sec)] mb-2 shiny-sec">GET IN TOUCH</h2>
@@ -27,11 +23,18 @@ const formspreeEndpoint = import.meta.env.PUBLIC_FORMSPREE_ENDPOINT;
       <div>
         <form
           id="contact-form"
-          action={formspreeEndpoint || "#contact"}
+          name="contact"
+          action="/"
           method="POST"
           class="flex flex-col gap-4"
           aria-describedby="form-error"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
         >
+          <input type="hidden" name="form-name" value="contact" />
+          <label class="hidden" aria-hidden="true">
+            Do not fill this out if you are human: <input name="bot-field" />
+          </label>
           <label class="sr-only" for="contact-name">Your name</label>
           <input id="contact-name" type="text" name="name" placeholder="Your name" autocomplete="name" required class="px-4 py-2 bg-[#1414149c] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)]" />
           <label class="sr-only" for="contact-email">Your email</label>
@@ -65,8 +68,6 @@ const formspreeEndpoint = import.meta.env.PUBLIC_FORMSPREE_ENDPOINT;
   const formMessage = document.getElementById("form-message");
   const formError = document.getElementById("form-error");
   const submitButton = form.querySelector('button[type="submit"]');
-  const formAction = form.getAttribute("action");
-
   const showError = (message) => {
     formError.textContent = message;
     formError.classList.remove("hidden");
@@ -81,11 +82,6 @@ const formspreeEndpoint = import.meta.env.PUBLIC_FORMSPREE_ENDPOINT;
       return;
     }
 
-    if (!formAction || formAction.endsWith("#contact")) {
-      showError("The contact form is not configured yet. Please email me directly instead.");
-      return;
-    }
-
     submitButton.disabled = true;
     submitButton.setAttribute("aria-busy", "true");
     submitButton.textContent = "Sending...";
@@ -95,8 +91,11 @@ const formspreeEndpoint = import.meta.env.PUBLIC_FORMSPREE_ENDPOINT;
     try {
       const response = await fetch(form.action, {
         method: "POST",
-        body: formData,
-        headers: { Accept: "application/json" },
+        body: new URLSearchParams(formData),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
       });
       if (response.ok) {
         form.reset();
