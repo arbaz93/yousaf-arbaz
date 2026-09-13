@@ -28,6 +28,12 @@ pnpm dev
 bun dev
 ```
 
+## Configure the contact form
+
+Enable form detection in Netlify before deploying. The contact form is marked with `data-netlify="true"` and uses the name `contact`, so submissions will appear under that form in the Netlify site admin panel.
+
+The form validates required fields in the browser and reports network and server errors inline. Netlify must process the first deployed version containing the form before submissions can be received.
+
 ## Author 
 ```
 Design and code is completely written by Andres Hernandez and development team. 
