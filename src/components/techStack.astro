@@ -1,0 +1,67 @@
+---
+import LogoWall from "./logoWall.astro";
+
+const categories = [
+  {
+    name: "Frontend",
+    technologies: [
+      "React",
+      "React Native",
+      "Next.js",
+      "TypeScript",
+      "JavaScript",
+      "Tailwind CSS",
+    ],
+  },
+  {
+    name: "Backend",
+    technologies: ["Node.js", "Express.js", "Python", "Flask"],
+  },
+  {
+    name: "Data & Infrastructure",
+    technologies: ["Firebase", "MongoDB", "PostgreSQL", "REST APIs"],
+  },
+  {
+    name: "AI",
+    technologies: [
+      "AI APIs",
+      "AI integrations",
+      "AI Chat Interfaces",
+      "AI Automation",
+      "AI-powered application development",
+    ],
+  },
+  {
+    name: "Tools",
+    technologies: ["Git", "Docker"],
+  },
+];
+---
+
+<section
+  id="tech-stack"
+  class="border-y border-[#ffffff10] py-12 text-[var(--white)]"
+>
+  <div class="max-w-5xl mx-auto">
+    <h2 class="text-lg text-[var(--sec)] mb-2 shiny-sec">My toolkit</h2>
+    <h3 class="text-3xl md:text-4xl font-medium mb-3">Tech Stack</h3>
+    <p class="text-sm md:text-base text-[var(--white-icon)] mb-8">
+      Technologies I use to build modern digital products.
+    </p>
+
+    <div class="border-y border-[var(--white-icon-tr)]">
+      {categories.map((category) => (
+        <div class="grid gap-2 border-b border-[var(--white-icon-tr)] py-4 last:border-b-0 md:grid-cols-[220px_1fr] md:gap-8">
+          <h4 class="text-sm font-medium uppercase tracking-wide text-[var(--sec)]">
+            {category.name}
+          </h4>
+          <p class="text-sm leading-6 text-[var(--white-icon)]">
+            {category.technologies.join(" · ")}
+          </p>
+        </div>
+      ))}
+    </div>
+
+    <LogoWall />
+  </div>
+</section>

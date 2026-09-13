@@ -1,61 +1,55 @@
 <section id="contact" class="w-full py-12 border-t border-[#ffffff10]">
   <div class="max-w-5xl mx-auto">
-    <h2 class="text-lg text-[var(--sec)] mb-2 shiny-sec">Let's talk</h2>
+    <h2 class="text-lg text-[var(--sec)] mb-2 shiny-sec">GET IN TOUCH</h2>
     <h3 class="text-4xl md:text-5xl font-medium text-[var(--white)] mb-6">
-      Contact
+      Have a project in mind? Let's build it.
     </h3>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       <div class="text-[var(--white-icon)]">
         <p class="mb-4">
-          Have a question or a project in mind? Feel free to reach out.
+          Tell me a little about your project, and I'll get back to you to discuss the requirements, timeline, and next steps.
         </p>
-        <div class="flex items-center gap-2">
-          <span>Location:</span>
-          <span class="text-[var(--white)]">Pakistan</span>
+        <div class="flex items-center gap-2 mb-6">
+          <span class="text-[var(--white)]">Based in Pakistan · Available worldwide</span>
+        </div>
+        <div class="flex items-center gap-5 text-[var(--white-icon)]">
+          <a href="https://github.com/arbaz93" target="_blank" rel="noreferrer" aria-label="GitHub" class="hover:text-[var(--white)] transition-colors">GitHub</a>
+          <a href="https://www.linkedin.com/in/arbazyousaf" target="_blank" rel="noreferrer" aria-label="LinkedIn" class="hover:text-[var(--white)] transition-colors">LinkedIn</a>
+          <a href="https://www.fiverr.com/arbaz_yousaf/" target="_blank" rel="noreferrer" aria-label="Fiverr" class="hover:text-[var(--white)] transition-colors">Fiverr</a>
+          <a href="mailto:arbazyousaf.dev@gmail.com" aria-label="Email" class="hover:text-[var(--white)] transition-colors">Email</a>
         </div>
       </div>
 
       <div>
         <form
           id="contact-form"
-          action="https://formspree.io/f/YOUR_FORM_ID_HERE"
+
           method="POST"
           class="flex flex-col gap-4"
+          data-netlify="true" 
         >
-          <input
-            type="text"
-            name="from_name"
-            placeholder="Name"
-            required
-            class="px-4 py-2 bg-[#1414149c] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)]"
-          />
-          <input
-            type="email"
-            name="reply_to"
-            placeholder="Email"
-            required
-            class="px-4 py-2 bg-[#1414149c] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)]"
-          />
-          <textarea
-            name="message"
-            placeholder="Message"
-            rows="6"
-            required
-            class="px-4 py-2 bg-[#1414149c] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)] resize-none"
-          ></textarea>
+          <label class="sr-only" for="contact-name">Your name</label>
+          <input id="contact-name" type="text" name="from_name" placeholder="Your name" required class="px-4 py-2 bg-[#1414149c] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)]" />
+          <label class="sr-only" for="contact-email">Your email</label>
+          <input id="contact-email" type="email" name="reply_to" placeholder="Your email" required class="px-4 py-2 bg-[#1414149c] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)]" />
+          <label class="sr-only" for="contact-message">Project details</label>
+          <textarea id="contact-message" name="message" placeholder="Tell me about your project, requirements, budget, or timeline..." rows="6" required class="px-4 py-2 bg-[#1414149c] text-[var(--white)] border border-[var(--white-icon-tr)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--sec)] resize-none"></textarea>
           <button
             type="submit"
             class="px-4 py-2 bg-[var(--white-icon-tr)] text-[var(--white)] rounded-lg opacity-60 transition-opacity border border-[var(--white-icon-tr)] hover:opacity-100 hover:bg-[var(--white-icon-tr)]"
           >
-            Submit
+            Send message
           </button>
         </form>
         <div
           id="form-message"
-          class="hidden justify-center items-center mt-4 text-[var(--white)] text-lg"
+          class="hidden mt-4 text-[var(--white)]"
+          role="status"
+          aria-live="polite"
         >
-          ✅ Thank you for your message!
+          Thanks for reaching out. I'll be in touch soon.
         </div>
+        <div id="form-error" class="hidden mt-4 text-[var(--white)]" role="alert"></div>
       </div>
     </div>
   </div>
@@ -64,9 +58,14 @@
 <script type="module" is:inline>
   const form = document.getElementById("contact-form");
   const formMessage = document.getElementById("form-message");
+  const formError = document.getElementById("form-error");
+  const submitButton = form.querySelector('button[type="submit"]');
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
+    submitButton.disabled = true;
+    submitButton.textContent = "Sending...";
+    formError.classList.add("hidden");
     const formData = new FormData(form);
 
     try {
@@ -80,13 +79,16 @@
         form.style.display = "none";
         formMessage.classList.remove("hidden");
       } else {
-        const data = await response.json();
-        console.error("Error response:", data);
-        alert("There was a problem sending your message.");
+        formError.textContent = "There was a problem sending your message. Please try again.";
+        formError.classList.remove("hidden");
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("There was a problem sending your message.");
+      formError.textContent = "There was a problem sending your message. Please try again.";
+      formError.classList.remove("hidden");
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = "Send message";
     }
   });
 </script>
