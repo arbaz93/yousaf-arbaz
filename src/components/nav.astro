@@ -27,6 +27,7 @@ const navItems: NavItem[] = [
 <div class="flex justify-center w-full">
   <nav
     id="main-nav"
+    aria-label="Main navigation"
     class="fixed left-1/2 -translate-x-1/2 z-[100] bg-[var(--background)] border border-1 border-transparent backdrop-blur-xl transition-all duration-500 ease-in-out md:top-6 md:bottom-auto bottom-0 w-[80%]"
   >
     <div class="container mx-auto flex justify-center items-center p-3">
@@ -39,6 +40,7 @@ const navItems: NavItem[] = [
               <a
                 href={item.href}
                 class="flex flex-col items-center gap-1 text-[var(--white-icon)] transition-colors text-xs md:text-base relative group"
+                aria-current={item.href === '#home' ? 'page' : undefined}
               >
                 <div class="absolute -left-6 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full transition-all duration-300 scale-0 opacity-0 bg-[#A9FF5B] nav-indicator hidden md:block" />
                 <span class="md:hidden flex items-center justify-center w-6 h-6">
@@ -159,11 +161,15 @@ const navItems: NavItem[] = [
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          navLinks.forEach((link) => link.classList.remove("active"));
+          navLinks.forEach((link) => {
+            link.classList.remove("active");
+            link.removeAttribute("aria-current");
+          });
           const id = entry.target.getAttribute("id");
           const activeLink = document.querySelector(`nav a[href="#${id}"]`);
           if (activeLink) {
             activeLink.classList.add("active");
+            activeLink.setAttribute("aria-current", "page");
           }
         }
       });
