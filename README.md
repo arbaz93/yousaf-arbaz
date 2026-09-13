@@ -1,47 +1,87 @@
-# DarkMinimal - Free Tailwind CSS & Astro Portfolio Website Template
-#### Preview
+# Yousaf Arbaz | Portfolio
 
- - [Demo](https://themewagon.github.io/dark-minimal/)
+A modern portfolio website for Yousaf Arbaz, built with Astro, Tailwind CSS, and React. The site showcases services, tech stack, featured projects, and a contact form for potential clients and collaborators.
 
-#### Download
- - [Download from ThemeWagon](https://themewagon.com/themes/dark-minimal/)
+## Overview
+
+This portfolio is designed to present a fullstack developer focused on building digital products, websites, web apps, and AI-powered experiences. It includes:
+
+- Strong personal branding and hero section
+- Skills and technology stack breakdown
+- Project showcase section
+- Contact form with client-side validation
+- Lightweight and responsive UI optimized for performance
+
+## Tech Stack
+
+- Astro
+- Tailwind CSS
+- React
+- TypeScript
+- Firebase
+- Netlify-friendly contact form setup
+
+## Project Structure
+
+```bash
+.
+├── public/
+│   ├── fonts/
+│   └── svg/
+├── src/
+│   ├── components/
+│   ├── layouts/
+│   ├── pages/
+│   ├── React/
+│   ├── firebase.ts
+│   └── env.d.ts
+├── astro.config.mjs
+├── package.json
+├── pnpm-lock.yaml
+├── tailwind.config.mjs
+├── tsconfig.json
+├── LICENSE
+└── README.md
+```
 
 ## Getting Started
 
-1. Clone Repository
-```
-git clone https://github.com/themewagon/dark-minimal.git
-```
-2. Install Dependencies
-```
-npm i
-```
-3. Run the development server:
+1. Install dependencies:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
+```
+
+2. Start the development server:
+
+```bash
 pnpm dev
-# or
-bun dev
 ```
 
-## Configure the contact form
+3. Build for production:
 
-Enable form detection in Netlify before deploying. The contact form is marked with `data-netlify="true"` and uses the name `contact`, so submissions will appear under that form in the Netlify site admin panel.
-
-The form validates required fields in the browser and reports network and server errors inline. Netlify must process the first deployed version containing the form before submissions can be received.
-
-## Author 
+```bash
+pnpm build
 ```
-Design and code is completely written by Andres Hernandez and development team. 
+
+4. Preview the production build:
+
+```bash
+pnpm preview
 ```
+
+
+## Contact Form
+
+The site includes a contact form that submits to the configured Netlify form endpoint. The form is set up with validation and inline error states for a smoother user experience.
+
+## Connect
+
+- GitHub: https://github.com/arbaz93
+- LinkedIn: https://www.linkedin.com/in/arbazyousaf
+- Fiverr: https://www.fiverr.com/arbaz_yousaf/
+- Email: arbazyousaf.dev@gmail.com
 
 ## License
 
- - Design and Code is Copyright &copy; <a href="https://github.com/Gothsec" target="_blank">Andres Hernandez</a>
- - Licensed cover under [MIT]
- - Distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
-# yousaf-arbaz
+This project is licensed under the terms of the [MIT License](LICENSE).
