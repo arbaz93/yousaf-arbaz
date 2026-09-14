@@ -1,0 +1,358 @@
+[
+  {
+    "id": "floorscape",
+    "title": "FloorScape",
+    "subtitle": "AI-powered architectural visualization platform",
+    "description": "An AI-assisted application that transforms uploaded 2D floor plans into photorealistic top-down 3D interior visualizations.",
+    "status": "Deployed",
+    "links": {
+      "live": "https://floorscape.netlify.app/",
+      "github": "https://github.com/arbaz93/FloorScape"
+    },
+    "heroImage": "/projects/floorscape-5.jpeg",
+    "overview": {
+      "description": "FloorScape makes it easier for homeowners, designers, and architects to imagine a space before a single wall is built. The platform removes the friction of static floor-plan reviews by turning rough layouts into vivid interior renders with AI assistance.",
+      "role": "Full-stack development, AI integration, application architecture, UI implementation, and deployment."
+    },
+    "challenge": {
+      "title": "The Challenge",
+      "description": "Translating a 2D architectural plan into an intuitive, client-friendly visualization requires more than technical rendering. The product needed to help users quickly upload a plan, understand AI-generated recommendations, and review design outcomes without requiring specialized technical knowledge."
+    },
+    "solution": {
+      "title": "The Solution",
+      "description": "The product combines a streamlined upload flow, AI-driven generation, and a polished review experience into a single workflow. By focusing on clear project states and a simple user journey, the platform helps people move from floor plan to visual concept without friction."
+    },
+    "features": [
+      {
+        "title": "AI-powered visualization",
+        "description": "Users can upload a floor plan and generate a photorealistic interpretation of the interior layout, making early design conversations much more concrete.",
+        "image": "/projects/floorscape-6.png"
+      },
+      {
+        "title": "Project persistence",
+        "description": "Each generated concept is tied to a project so users can revisit, compare, and iterate on spatial ideas without losing context.",
+        "image": "/projects/floorscape-7.png"
+      },
+      {
+        "title": "Fast design iteration",
+        "description": "The interface supports a quick cycle from upload to visual generation, helping users move from concept to feedback without bouncing between tools.",
+        "image": "/projects/floorscape-5.jpeg"
+      }
+    ],
+    "workflow": [
+      {
+        "step": "01",
+        "title": "Upload",
+        "description": "Users begin by uploading a 2D floor plan and defining the project context."
+      },
+      {
+        "step": "02",
+        "title": "AI generation",
+        "description": "The platform processes the layout and generates a realistic visual interpretation of the space."
+      },
+      {
+        "step": "03",
+        "title": "Visualization",
+        "description": "The generated result is presented as a clear, design-driven render that is easy to review."
+      },
+      {
+        "step": "04",
+        "title": "Persistence",
+        "description": "Projects stay connected to the generated assets so the user can revisit or iterate on them."
+      },
+      {
+        "step": "05",
+        "title": "Export",
+        "description": "The final concept can be shared and used as a decision-making artifact in project discussions."
+      }
+    ],
+    "screenshots": [
+      {
+        "title": "Floor plan upload",
+        "image": "/projects/floorscape.png"
+      },
+      {
+        "title": "Project conversion",
+        "image": "/projects/floorscape-1.png"
+      },
+      {
+        "title": "Design visualization",
+        "image": "/projects/floorscape-2.png"
+      },
+      {
+        "title": "Community curated gallery",
+        "image": "/projects/floorscape-4.png"
+      }
+    ],
+    "architecture": {
+      "description": "The system balances client-side responsiveness with AI-driven backend processes, ensuring the application remains approachable while the generation pipeline handles the heavier work.",
+      "items": [
+        {
+          "name": "Frontend",
+          "technologies": ["React 19", "React Router 7", "TypeScript", "Vite", "Tailwind CSS"]
+        },
+        {
+          "name": "AI & Platform",
+          "technologies": ["Puter AI", "Puter Auth", "Puter KV", "Puter Hosting", "Puter Workers"]
+        },
+        {
+          "name": "Infrastructure",
+          "technologies": ["Node.js", "Docker"]
+        }
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Building a product around AI generation",
+        "description": "The product had to feel polished and trustworthy even while the generation pipeline was inherently variable. A strong UX layer was essential to make AI output usable and understandable."
+      },
+      {
+        "title": "Managing generated assets",
+        "description": "Generated visuals, metadata, and user projects needed a reliable structure so they could be retrieved, compared, and reused without causing clutter or confusion."
+      },
+      {
+        "title": "Connecting the frontend to worker-based APIs",
+        "description": "The interface needed to integrate cleanly with an asynchronous backend model, which required careful handling of loading states and API coordination as work moved through the pipeline."
+      }
+    ],
+    "result": {
+      "title": "The Result",
+      "description": "The platform gives users a clear path from floor plan to concept visualization, turning a technical AI workflow into a tangible design tool that is easy to understand and interact with."
+    },
+    "learnings": {
+      "title": "What I Learned",
+      "description": "This project reinforced how important product clarity is when building AI features. The most effective experiences are not just technically capable; they guide the user with confidence, structure, and a thoughtful interaction model."
+    }
+  },
+  {
+    "id": "imageer",
+    "title": "Imageer",
+    "subtitle": "Full-stack image processing platform",
+    "description": "A browser-based image editing and processing app that helps users upload, transform, and preview images with a simple, guided workflow.",
+    "status": "Deployed",
+    "links": {
+      "live": "https://imageer.netlify.app/",
+      "github": "https://github.com/arbaz93/Imageer"
+    },
+    "heroImage": "/projects/Imageer-3.png",
+    "overview": {
+      "description": "Imageer is a full-stack image processing platform designed to make editing feel approachable and practical. The application gives users a clear path for uploading media, applying transformations, and reviewing the result in a clean interface.",
+      "role": "Frontend architecture, image workflow design, backend integration, and deployment."
+    },
+    "challenge": {
+      "title": "The Challenge",
+      "description": "Image processing tools often become overwhelming when they expose too many editing options at once. The challenge was to keep the experience simple while still supporting enough functionality to feel genuinely useful for everyday work."
+    },
+    "solution": {
+      "title": "The Solution",
+      "description": "The product focuses on a guided workflow with practical operations and immediate visual feedback. By framing the app around clear actions and meaningful previews, it balances speed and usability without sacrificing capability."
+    },
+    "features": [
+      {
+        "title": "Drag-and-drop uploads",
+        "description": "Users can quickly move files into the app and begin working without spending time learning a complicated process.",
+        "image": "/projects/Imageer-2.png"
+      },
+      {
+        "title": "Image transformation workflow",
+        "description": "The editing flow is designed around clear stages and real-time results so the process feels structured instead of chaotic.",
+        "image": "/projects/Imageer-4.png"
+      },
+      {
+        "title": "Review-first experience",
+        "description": "The interface emphasizes previewing and reviewing processed images before finalizing the result, reducing unnecessary friction.",
+        "image": "/projects/Imageer-5.png"
+      }
+    ],
+    "workflow": [
+      {
+        "step": "01",
+        "title": "Upload",
+        "description": "Select or drop in the image files you want to process."
+      },
+      {
+        "step": "02",
+        "title": "Transform",
+        "description": "Apply the required processing steps inside an interface designed to stay easy to follow."
+      },
+      {
+        "step": "03",
+        "title": "Review",
+        "description": "Preview the updated image and make sure the output matches the intended result."
+      },
+      {
+        "step": "04",
+        "title": "Export",
+        "description": "Download the processed file once the result is ready for use."
+      }
+    ],
+    "screenshots": [
+      
+      {
+        "title": "Editor layout",
+        "image": "/projects/Imageer.png"
+      },
+      {
+        "title": "Processed output",
+        "image": "/projects/Imageer-1.png"
+      },
+      {
+        "title": "Processed output",
+        "image": "/projects/Imageer-2.png"
+      },
+      {
+        "title": "Processed output",
+        "image": "/projects/Imageer-3.png"
+      },
+      {
+        "title": "Processed output",
+        "image": "/projects/Imageer-4.png"
+      },
+      {
+        "title": "Processed output",
+        "image": "/projects/Imageer-5.png"
+      }
+    ],
+    "architecture": {
+      "description": "The app uses a simple, front-end-led architecture backed by a reliable processing layer, keeping the experience responsive while still supporting real image operations.",
+      "items": [
+        {
+          "name": "Frontend",
+          "technologies": ["React", "TypeScript", "Tailwind CSS", "Vite"]
+        },
+        {
+          "name": "Application Layer",
+          "technologies": ["Node.js", "Express", "File handling", "Image processing"]
+        },
+        {
+          "name": "Deployment",
+          "technologies": ["Netlify", "CI/CD"]
+        }
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Keeping the UI approachable",
+        "description": "Image editing tools often overload users with controls. The design needed to simplify complexity without stripping away the functionality that matters most."
+      },
+      {
+        "title": "Designing for real processing work",
+        "description": "The app had to balance visual clarity with practical processing needs, ensuring operations felt both useful and dependable."
+      },
+      {
+        "title": "Optimizing the user flow",
+        "description": "The experience needed to reduce friction between upload, processing, and output so users could move through the workflow naturally."
+      }
+    ],
+    "result": {
+      "title": "The Result",
+      "description": "Imageer demonstrates a usable, full-stack image workflow that feels intentional, approachable, and ready for real-world use without becoming unnecessarily complex."
+    },
+    "learnings": {
+      "title": "What I Learned",
+      "description": "This project sharpened my thinking around balancing simplicity with capability. The best product experiences are often the ones that hide complexity behind a clear, confident path."
+    }
+  },
+  {
+    "id": "businessflow-ai",
+    "title": "BusinessFlow AI",
+    "subtitle": "AI-powered workflow orchestration for business operations",
+    "description": "A concept product designed to help teams automate operational workflows, summarize work, and coordinate tasks through AI-assisted decision support.",
+    "status": "In Development",
+    "links": {
+      "live": null,
+      "github": null
+    },
+    "heroImage": null,
+    "overview": {
+      "description": "BusinessFlow AI explores how intelligent automation can reduce operational drag in day-to-day business work. The focus is on helping teams move faster while keeping the process understandable and controlled.",
+      "role": "Product strategy, workflow design, frontend implementation, and AI feature exploration."
+    },
+    "challenge": {
+      "title": "The Challenge",
+      "description": "Many business tools focus on creating more data without reducing the cognitive load on the people using them. The challenge was to build a system that makes operational workflow clearer instead of more fragmented."
+    },
+    "solution": {
+      "title": "The Solution",
+      "description": "The product centers around structured workflows, helpful automation, and AI-assisted summaries that keep teams aligned without requiring constant manual triage."
+    },
+    "features": [
+      {
+        "title": "Workflow orchestration",
+        "description": "The platform organizes operational steps into a clear flow so users can understand what is happening at a glance.",
+        "image": null
+      },
+      {
+        "title": "AI summaries",
+        "description": "Automatic summaries help surface the most important details without forcing decision-makers to read through everything manually.",
+        "image": null
+      },
+      {
+        "title": "Operational visibility",
+        "description": "The interface is designed to keep key task context visible and actionable for teams as work moves forward.",
+        "image": null
+      }
+    ],
+    "workflow": [
+      {
+        "step": "01",
+        "title": "Define work",
+        "description": "Teams define the business process or task flow that needs structure and visibility."
+      },
+      {
+        "step": "02",
+        "title": "Automate steps",
+        "description": "The system surfaces the most relevant actions and automations to reduce repetitive effort."
+      },
+      {
+        "step": "03",
+        "title": "Summarize status",
+        "description": "AI-assisted summaries explain progress, blockers, and next steps without overwhelming the user."
+      },
+      {
+        "step": "04",
+        "title": "Review & adapt",
+        "description": "Teams continue refining the workflow so it stays aligned with business realities."
+      }
+    ],
+    "architecture": {
+      "description": "This concept product is structured around a clear frontend experience, AI-powered insight generation, and service orchestration that can scale as operational needs evolve.",
+      "items": [
+        {
+          "name": "Frontend",
+          "technologies": ["React", "TypeScript", "Tailwind CSS", "Next.js"]
+        },
+        {
+          "name": "AI Layer",
+          "technologies": ["Generative AI", "Prompt orchestration", "Workflow intelligence"]
+        },
+        {
+          "name": "Operations",
+          "technologies": ["Business logic", "Automation", "API integration"]
+        }
+      ]
+    },
+    "challenges": [
+      {
+        "title": "Reducing operational noise",
+        "description": "The product had to keep decision-making context visible without creating more dashboard clutter or complexity."
+      },
+      {
+        "title": "Balancing automation with control",
+        "description": "AI features work best when they support people, not replace their judgment. The system needed to present automation as an aid rather than an opaque black box."
+      },
+      {
+        "title": "Designing for real business workflows",
+        "description": "This required aligning product decisions to the realities of operations teams and the environments they already work in."
+      }
+    ],
+    "result": {
+      "title": "The Result",
+      "description": "The concept explores a practical AI workflow product that supports real business operations without overwhelming the user with extra complexity."
+    },
+    "learnings": {
+      "title": "What I Learned",
+      "description": "Strong product thinking matters just as much as technical capability in AI-driven systems. The best automation experiences are grounded in real work, clear context, and trust."
+    }
+  }
+]

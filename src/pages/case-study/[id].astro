@@ -1,0 +1,65 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Nav from "@/components/nav.astro";
+import Footer from "@/components/footer.astro";
+import CaseStudyPage, {
+  type CaseStudy,
+} from "@/components/case-study/CaseStudyPage.astro";
+import caseStudiesData from "@/data/case-studies.json";
+
+const { id } = Astro.params;
+const caseStudy = (caseStudiesData as CaseStudy[]).find(
+  (item: CaseStudy) => item.id === id
+);
+
+if (!caseStudy) {
+  Astro.response.status = 404;
+}
+
+export function getStaticPaths() {
+  return (caseStudiesData as CaseStudy[]).map((study: CaseStudy) => ({
+    params: { id: study.id },
+  }));
+}
+---
+
+{
+  caseStudy ? (
+    <Layout
+      title={`${caseStudy.title} | Yousaf Arbaz`}
+      description={caseStudy.description}
+      ogTitle={`${caseStudy.title} | Yousaf Arbaz`}
+      ogDescription={caseStudy.description}
+      ogImage={caseStudy.heroImage || "/og.image.png"}
+      ogUrl={`https://darkminimal.vercel.app/case-study/${caseStudy.id}`}
+    >
+      <Nav />
+      <main id="main-content">
+        <CaseStudyPage caseStudy={caseStudy} />
+      </main>
+      <Footer />
+    </Layout>
+  ) : (
+    <Layout
+      title="Case study not found | Yousaf Arbaz"
+      description="The requested case study could not be found."
+      ogTitle="Case study not found | Yousaf Arbaz"
+      ogDescription="The requested case study could not be found."
+      ogImage="/og.image.png"
+      ogUrl="https://darkminimal.vercel.app"
+    >
+      <Nav />
+      <main id="main-content" class="mx-auto max-w-3xl px-4 py-24 text-center text-[var(--white)] sm:px-6 lg:px-8">
+        <p class="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--sec)]">404</p>
+        <h1 class="mt-4 text-4xl font-medium">Case study not found</h1>
+        <p class="mt-5 text-lg text-[var(--white-icon)]">
+          The case study you requested does not exist or may have been removed.
+        </p>
+        <a href="/#projects" class="mt-8 inline-flex items-center justify-center rounded-full border border-[var(--white-icon-tr)] px-5 py-3 text-sm font-medium text-[var(--white)] transition-colors hover:bg-[var(--white-icon-tr)]">
+          Back to projects
+        </a>
+      </main>
+      <Footer />
+    </Layout>
+  )
+}

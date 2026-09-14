@@ -1,5 +1,6 @@
 ---
 interface Project {
+  id: string;
   title: string;
   image: string;
   link: string;
@@ -11,38 +12,42 @@ interface Project {
 
 const projects: Project[] = [
   {
-    title: "BuisnessFlow AI",
+    id: "businessflow-ai",
+    title: "BusinessFlow AI",
     image: "https://placehold.co/600x400/1a1a1a/ffffff?text=Project+One",
     link: "#!",
     preview: "#!",
-    casestudy: "casestudy",
+    casestudy: "/case-study/businessflow-ai",
     status: "In Development",
     technologies: ["React", "Node.js", "MongoDB"],
   },
   {
+    id: "floorscape",
     title: "FloorScape",
-    image: "/projects/Floorscape.png",
+    image: "/projects/portfolio-floorscape.jpeg",
     link: "https://github.com/arbaz93/FloorScape",
     preview: "https://floorscape.netlify.app/",
-    casestudy: "casestudy",
+    casestudy: "/case-study/floorscape",
     status: "AI-powered architectural visualization platform",
     technologies: ["React", "Node.js", "MongoDB"],
   },
   {
+    id: "imageer",
     title: "Imageer",
-    image: "/projects/Imageer.png",
+    image: "/projects/portfolio-imageer.png",
     link: "https://github.com/arbaz93/Imageer",
     preview: "https://imageer.netlify.app/",
-    casestudy: "casestudy",
+    casestudy: "/case-study/imageer",
     status: "Full-stack image processing platform",
     technologies: ["React", "Node.js", "MongoDB"],
   },
   {
+    id: "project-4",
     title: "Project 4",
     image: "https://placehold.co/600x400/1a1a1a/ffffff?text=Project+Four",
     link: "https://placehold.co/600x400/1a1a1a/ffffff?text=Project+Four",
     preview: "#!",
-    casestudy: "casestudy",
+    casestudy: "/case-study/project-4",
     status: "Deployed",
     technologies: ["React", "Node.js", "MongoDB"],
   },
@@ -64,8 +69,6 @@ const projects: Project[] = [
             <div class="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 mb-4">
               <a
                 href={project.casestudy}
-                target="_blank"
-                rel="noopener noreferrer"
                 class="block"
                 aria-label={`View case study for ${project.title}`}
               >

@@ -1,0 +1,388 @@
+---
+interface Feature {
+  title: string;
+  description: string;
+  image?: string | null;
+}
+
+interface WorkflowStep {
+  step: string;
+  title: string;
+  description: string;
+}
+
+interface ArchitectureItem {
+  name: string;
+  technologies: string[];
+}
+
+interface ChallengeItem {
+  title: string;
+  description: string;
+}
+
+export type CaseStudy = {
+  id: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  status: string;
+  links: {
+    live?: string | null;
+    github?: string | null;
+  };
+  heroImage?: string | null;
+  overview: {
+    description: string;
+    role: string;
+  };
+  challenge: {
+    title: string;
+    description: string;
+  };
+  solution: {
+    title: string;
+    description: string;
+  };
+  features: Feature[];
+  workflow: WorkflowStep[];
+  screenshots?: Array<{ title: string; image?: string | null }>;
+  architecture: {
+    description: string;
+    items: ArchitectureItem[];
+  };
+  challenges: ChallengeItem[];
+  result: {
+    title: string;
+    description: string;
+  };
+  learnings: {
+    title: string;
+    description: string;
+  };
+};
+
+interface Props {
+  caseStudy: CaseStudy;
+}
+
+const { caseStudy } = Astro.props as Props;
+
+const hasHeroImage = Boolean(caseStudy.heroImage && caseStudy.heroImage.trim());
+const hasScreenshots = caseStudy.screenshots?.some(
+  (screenshot: { image?: string | null }) =>
+    Boolean(screenshot.image && screenshot.image.trim())
+);
+---
+
+<section class="mx-auto max-w-6xl px-4 pb-16 pt-24 sm:px-6 lg:px-8">
+  <div class="mb-8 pt-2">
+    <a
+      href="/#projects"
+      class="inline-flex items-center gap-2 text-sm text-[var(--white-icon)] transition-colors hover:text-[var(--white)]"
+      aria-label="Back to projects"
+    >
+      <span aria-hidden="true">←</span>
+      <span>Back to projects</span>
+    </a>
+  </div>
+
+  <header class="border border-[#ffffff10] bg-[#101010] px-6 py-8 sm:px-8 lg:px-10 lg:py-10">
+    <div class="grid items-center gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+      <div>
+        <p class="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-[var(--sec)]">
+          Case study
+        </p>
+        <h1 class="text-4xl font-medium tracking-tight text-[var(--white)] md:text-5xl">
+          {caseStudy.title}
+        </h1>
+        <p class="mt-4 text-xl text-[var(--white-icon)] md:text-2xl">
+          {caseStudy.subtitle}
+        </p>
+        <p class="mt-5 max-w-xl text-base leading-relaxed text-[var(--white-icon)]">
+          {caseStudy.description}
+        </p>
+
+        <div class="mt-7 flex flex-wrap gap-3">
+          {
+            caseStudy.links.live && (
+              <a
+                href={caseStudy.links.live}
+                target="_blank"
+                rel="noreferrer"
+                class="inline-flex items-center justify-center rounded-full border border-[var(--white-icon-tr)] bg-[var(--white-icon-tr)] px-5 py-2.5 text-sm font-medium text-[var(--white)] transition-colors hover:bg-[var(--white-icon-tr)]"
+              >
+                View live demo
+              </a>
+            )
+          }
+          {
+            caseStudy.links.github && (
+              <a
+                href={caseStudy.links.github}
+                target="_blank"
+                rel="noreferrer"
+                class="inline-flex items-center justify-center rounded-full border border-[var(--white-icon-tr)] px-5 py-2.5 text-sm font-medium text-[var(--white-icon)] transition-colors hover:text-[var(--white)]"
+              >
+                View source code
+              </a>
+            )
+          }
+        </div>
+      </div>
+
+      {
+        hasHeroImage && (
+          <div class="overflow-hidden rounded-2xl border border-[#ffffff10] bg-[#121212]">
+            <img
+              src={caseStudy.heroImage}
+              alt={`${caseStudy.title} hero preview`}
+              class="h-full w-full object-cover"
+              loading="eager"
+            />
+          </div>
+        )
+      }
+    </div>
+  </header>
+
+  <section class="mt-16 border-t border-[#ffffff10] pt-12">
+    <div class="mb-8">
+      <p class="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--sec)]">
+        Overview
+      </p>
+      <h2 class="mt-3 text-3xl font-medium text-[var(--white)] md:text-4xl">
+        Context and scope
+      </h2>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-[1.2fr_0.8fr]">
+      <div class="rounded-2xl border border-[#ffffff10] bg-[#111111] p-6">
+        <p class="text-lg leading-relaxed text-[var(--white-icon)]">
+          {caseStudy.overview.description}
+        </p>
+      </div>
+
+      <dl class="rounded-2xl border border-[#ffffff10] bg-[#111111] p-6 text-sm text-[var(--white-icon)]">
+        <div class="mb-5">
+          <dt class="text-xs uppercase tracking-[0.2em] text-[var(--sec)]">Role</dt>
+          <dd class="mt-2 leading-relaxed text-[var(--white)]">{caseStudy.overview.role}</dd>
+        </div>
+        <div class="mb-5">
+          <dt class="text-xs uppercase tracking-[0.2em] text-[var(--sec)]">Status</dt>
+          <dd class="mt-2 text-[var(--white)]">{caseStudy.status}</dd>
+        </div>
+        <div>
+          <dt class="text-xs uppercase tracking-[0.2em] text-[var(--sec)]">Links</dt>
+          <dd class="mt-3 flex flex-wrap gap-3">
+            {
+              caseStudy.links.live && (
+                <a href={caseStudy.links.live} target="_blank" rel="noreferrer" class="text-[var(--white)] underline-offset-4 hover:underline">
+                  Live demo
+                </a>
+              )
+            }
+            {
+              caseStudy.links.github && (
+                <a href={caseStudy.links.github} target="_blank" rel="noreferrer" class="text-[var(--white)] underline-offset-4 hover:underline">
+                  GitHub
+                </a>
+              )
+            }
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="mt-16 border-t border-[#ffffff10] pt-12">
+    <div class="grid gap-10 lg:grid-cols-2">
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--sec)]">
+          {caseStudy.challenge.title}
+        </p>
+        <h2 class="mt-3 text-3xl font-medium text-[var(--white)] md:text-4xl">
+          The problem
+        </h2>
+        <p class="mt-5 text-lg leading-relaxed text-[var(--white-icon)]">
+          {caseStudy.challenge.description}
+        </p>
+      </div>
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--sec)]">
+          {caseStudy.solution.title}
+        </p>
+        <h2 class="mt-3 text-3xl font-medium text-[var(--white)] md:text-4xl">
+          The approach
+        </h2>
+        <p class="mt-5 text-lg leading-relaxed text-[var(--white-icon)]">
+          {caseStudy.solution.description}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {
+    caseStudy.features?.length > 0 && (
+      <section class="mt-16 border-t border-[#ffffff10] pt-12">
+        <div class="mb-8">
+          <p class="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--sec)]">Features</p>
+          <h2 class="mt-3 text-3xl font-medium text-[var(--white)] md:text-4xl">What makes it work</h2>
+        </div>
+        <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {caseStudy.features.map((feature) => (
+            <article class="overflow-hidden rounded-2xl border border-[#ffffff10] bg-[#111111]">
+              {feature.image && feature.image.trim() && (
+                <img
+                  src={feature.image}
+                  alt={feature.title}
+                  class="h-56 w-full object-cover"
+                  loading="lazy"
+                />
+              )}
+              <div class="p-6">
+                <h3 class="text-xl font-medium text-[var(--white)]">{feature.title}</h3>
+                <p class="mt-3 text-base leading-relaxed text-[var(--white-icon)]">{feature.description}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  {
+    caseStudy.workflow?.length > 0 && (
+      <section class="mt-16 border-t border-[#ffffff10] pt-12">
+        <div class="mb-8">
+          <p class="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--sec)]">Workflow</p>
+          <h2 class="mt-3 text-3xl font-medium text-[var(--white)] md:text-4xl">How it works</h2>
+        </div>
+
+        <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+          {caseStudy.workflow.map((step) => (
+            <div class="rounded-2xl border border-[#ffffff10] bg-[#111111] p-5">
+              <span class="text-sm font-semibold tracking-[0.2em] text-[var(--sec)]">{step.step}</span>
+              <h3 class="mt-4 text-xl font-medium text-[var(--white)]">{step.title}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-[var(--white-icon)]">{step.description}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  {
+    hasScreenshots && (
+      <section class="mt-16 border-t border-[#ffffff10] pt-12">
+        <div class="mb-8">
+          <p class="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--sec)]">Screenshots</p>
+          <h2 class="mt-3 text-3xl font-medium text-[var(--white)] md:text-4xl">Project snapshots</h2>
+        </div>
+
+        <div class="grid gap-6 lg:grid-cols-2">
+          {caseStudy.screenshots
+            ?.filter((screenshot) => screenshot.image && screenshot.image.trim())
+            .map((screenshot) => (
+              <figure class="overflow-hidden rounded-2xl border border-[#ffffff10] bg-[#111111]">
+                <img
+                  src={screenshot.image}
+                  alt={screenshot.title}
+                  class="h-full w-full object-cover"
+                  loading="lazy"
+                />
+                <figcaption class="border-t border-[#ffffff10] px-4 py-3 text-sm text-[var(--white-icon)]">
+                  {screenshot.title}
+                </figcaption>
+              </figure>
+            ))}
+        </div>
+      </section>
+    )
+  }
+
+  {
+    caseStudy.architecture && (
+      <section class="mt-16 border-t border-[#ffffff10] pt-12">
+        <div class="mb-8">
+          <p class="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--sec)]">Technical architecture</p>
+          <h2 class="mt-3 text-3xl font-medium text-[var(--white)] md:text-4xl">Built around the right stack</h2>
+        </div>
+
+        <div class="rounded-2xl border border-[#ffffff10] bg-[#111111] p-6 md:p-8">
+          <p class="mb-8 text-lg leading-relaxed text-[var(--white-icon)]">
+            {caseStudy.architecture.description}
+          </p>
+
+          <div class="grid gap-5 md:grid-cols-3">
+            {caseStudy.architecture.items.map((item) => (
+              <div class="rounded-2xl border border-[#ffffff10] bg-[#101010] p-5">
+                <h3 class="text-lg font-medium text-[var(--white)]">{item.name}</h3>
+                <div class="mt-4 flex flex-wrap gap-2">
+                  {item.technologies.map((technology) => (
+                    <span class="rounded-full border border-[var(--white-icon-tr)] bg-[#1414149c] px-2.5 py-1 text-xs text-[var(--white-icon)]">
+                      {technology}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    caseStudy.challenges?.length > 0 && (
+      <section class="mt-16 border-t border-[#ffffff10] pt-12">
+        <div class="mb-8">
+          <p class="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--sec)]">Challenges & engineering decisions</p>
+          <h2 class="mt-3 text-3xl font-medium text-[var(--white)] md:text-4xl">Decision-making behind the build</h2>
+        </div>
+
+        <div class="space-y-5">
+          {caseStudy.challenges.map((item) => (
+            <article class="rounded-2xl border border-[#ffffff10] bg-[#111111] p-6">
+              <h3 class="text-xl font-medium text-[var(--white)]">{item.title}</h3>
+              <p class="mt-3 text-base leading-relaxed text-[var(--white-icon)]">{item.description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+    )
+  }
+
+  <section class="mt-16 border-t border-[#ffffff10] pt-12">
+    <p class="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--sec)]">
+      {caseStudy.result.title}
+    </p>
+    <h2 class="mt-3 text-3xl font-medium text-[var(--white)] md:text-4xl">Outcome</h2>
+    <p class="mt-5 max-w-3xl text-lg leading-relaxed text-[var(--white-icon)]">
+      {caseStudy.result.description}
+    </p>
+  </section>
+
+  <section class="mt-16 border-t border-[#ffffff10] pt-12">
+    <p class="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--sec)]">
+      {caseStudy.learnings.title}
+    </p>
+    <h2 class="mt-3 text-3xl font-medium text-[var(--white)] md:text-4xl">Takeaways</h2>
+    <p class="mt-5 max-w-3xl text-lg leading-relaxed text-[var(--white-icon)]">
+      {caseStudy.learnings.description}
+    </p>
+  </section>
+
+  <section class="mt-20 border-t border-[#ffffff10] pt-12">
+    <div class="rounded-2xl border border-[#ffffff10] bg-[#111111] p-8 text-center md:p-10">
+      <p class="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--sec)]">Have a similar project in mind?</p>
+      <h2 class="mt-4 text-3xl font-medium text-[var(--white)] md:text-4xl">Let's build it.</h2>
+      <a
+        href="/#contact"
+        class="mt-7 inline-flex items-center justify-center rounded-full bg-[var(--white-icon-tr)] px-6 py-3 text-sm font-medium text-[var(--white)] transition-colors hover:bg-[var(--white-icon-tr)]"
+      >
+        Start a project
+      </a>
+    </div>
+  </section>
+</section>
