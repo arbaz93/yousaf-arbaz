@@ -82,6 +82,10 @@
       {
         "title": "Community curated gallery",
         "image": "/projects/floorscape-4.png"
+      },
+      {
+        "title": "Final Result",
+        "image": "/projects/floorscape-5.jpeg"
       }
     ],
     "architecture": {
@@ -189,27 +193,27 @@
     "screenshots": [
       
       {
-        "title": "Editor layout",
+        "title": "Landing page",
         "image": "/projects/Imageer.png"
       },
       {
-        "title": "Processed output",
+        "title": "Landing page with conversion",
         "image": "/projects/Imageer-1.png"
       },
       {
-        "title": "Processed output",
+        "title": "Image uploader",
         "image": "/projects/Imageer-2.png"
       },
       {
-        "title": "Processed output",
+        "title": "image uploaded and ready for sharing",
         "image": "/projects/Imageer-3.png"
       },
       {
-        "title": "Processed output",
+        "title": "Image convertor",
         "image": "/projects/Imageer-4.png"
       },
       {
-        "title": "Processed output",
+        "title": "Image conversion and download",
         "image": "/projects/Imageer-5.png"
       }
     ],
@@ -256,103 +260,154 @@
   {
     "id": "businessflow-ai",
     "title": "BusinessFlow AI",
-    "subtitle": "AI-powered workflow orchestration for business operations",
-    "description": "A concept product designed to help teams automate operational workflows, summarize work, and coordinate tasks through AI-assisted decision support.",
-    "status": "In Development",
+    "subtitle": "AI-powered operations workspace for digital and creative agencies",
+    "description": "BusinessFlow AI unifies leads, clients, projects, tasks, documents, and AI-assisted delivery in one tenant-scoped workspace so teams can move from opportunity to execution without losing context.",
+    "status": "Deployed",
     "links": {
-      "live": null,
-      "github": null
+      "live": "https://businessflow-ai-lime.vercel.app/",
+      "github": "https://github.com/arbaz93/BusinessFlow-AI"
     },
-    "heroImage": null,
+    "heroImage": "/projects/businessflow-ai/dashboard%20page.png",
     "overview": {
-      "description": "BusinessFlow AI explores how intelligent automation can reduce operational drag in day-to-day business work. The focus is on helping teams move faster while keeping the process understandable and controlled.",
-      "role": "Product strategy, workflow design, frontend implementation, and AI feature exploration."
+      "description": "BusinessFlow AI is built for agencies and consultancies managing the full lifecycle from lead capture to project delivery. Instead of bouncing between disconnected tools, users work inside a single workspace where leads, clients, project briefs, tasks, and AI analysis all live in context.",
+      "role": "Full-stack product architecture, multi-tenant UX, AI workflow design, document processing, and deployment-focused implementation."
     },
     "challenge": {
       "title": "The Challenge",
-      "description": "Many business tools focus on creating more data without reducing the cognitive load on the people using them. The challenge was to build a system that makes operational workflow clearer instead of more fragmented."
+      "description": "Agencies often juggle fragmented systems for sales, delivery, documentation, and task coordination. The challenge was to connect that lifecycle into one operational workspace without sacrificing clarity, access control, or human oversight."
     },
     "solution": {
       "title": "The Solution",
-      "description": "The product centers around structured workflows, helpful automation, and AI-assisted summaries that keep teams aligned without requiring constant manual triage."
+      "description": "The product organizes the agency workflow around organizations, clients, projects, and tasks, then adds AI at the two moments where it helps most: analyzing project briefs and proposing tasks for review. The system keeps humans in the loop so automation supports execution instead of replacing judgment."
     },
     "features": [
       {
-        "title": "Workflow orchestration",
-        "description": "The platform organizes operational steps into a clear flow so users can understand what is happening at a glance.",
-        "image": null
+        "title": "Lead-to-client-to-project workflow",
+        "description": "The workspace tracks pipeline stages, converts qualified leads into clients, and keeps project delivery tied to the same operational context from start to finish.",
+        "image": "/projects/businessflow-ai/leads%20page.png"
       },
       {
-        "title": "AI summaries",
-        "description": "Automatic summaries help surface the most important details without forcing decision-makers to read through everything manually.",
-        "image": null
+        "title": "AI Project Intelligence",
+        "description": "A project brief is analyzed with Gemini to produce structured requirements, risks, questions, and suggested tasks that are reviewed before anything becomes real work.",
+        "image": "/projects/businessflow-ai/project%20-%20ai%20brief%20-%20dark%20page.png"
       },
       {
-        "title": "Operational visibility",
-        "description": "The interface is designed to keep key task context visible and actionable for teams as work moves forward.",
-        "image": null
+        "title": "Private document handling",
+        "description": "Project documents are stored privately within each organization and validated before upload, ensuring briefs and supporting files remain secure and traceable.",
+        "image": "/projects/businessflow-ai/project%20-%20documents%20page.png"
       }
     ],
     "workflow": [
       {
         "step": "01",
-        "title": "Define work",
-        "description": "Teams define the business process or task flow that needs structure and visibility."
+        "title": "Capture",
+        "description": "New leads enter the pipeline and move through status stages before qualification."
       },
       {
         "step": "02",
-        "title": "Automate steps",
-        "description": "The system surfaces the most relevant actions and automations to reduce repetitive effort."
+        "title": "Convert",
+        "description": "Qualified leads become clients while preserving a clean record of the sales history."
       },
       {
         "step": "03",
-        "title": "Summarize status",
-        "description": "AI-assisted summaries explain progress, blockers, and next steps without overwhelming the user."
+        "title": "Scope",
+        "description": "Projects are created around the client, brief, and delivery plan with status and priority tracking."
       },
       {
         "step": "04",
-        "title": "Review & adapt",
-        "description": "Teams continue refining the workflow so it stays aligned with business realities."
+        "title": "Analyze",
+        "description": "The primary brief is processed by Gemini and transformed into structured project intelligence."
+      },
+      {
+        "step": "05",
+        "title": "Review",
+        "description": "Suggested tasks are edited, approved, and turned into assignable work only with explicit human confirmation."
+      }
+    ],
+    "screenshots": [
+      {
+        "title": "Marketing page",
+        "image": "/projects/businessflow-ai/Marketing - landing page.png"
+      },
+            {
+        "title": "Features page",
+        "image": "/public/projects/businessflow-ai/Features page.png"
+      },
+      {
+        "title": "Solutions page",
+        "image": "/public/projects/businessflow-ai/Solutions page.png"
+      },
+      {
+        "title": "AI Project Intelligence",
+        "image": "/projects/businessflow-ai/project%20-%20ai%20brief%20-%20dark%20page.png"
+      },
+      {
+        "title": "Workspace dashboard",
+        "image": "/projects/businessflow-ai/dashboard%20page.png"
+      },
+      {
+        "title": "Lead pipeline",
+        "image": "/projects/businessflow-ai/leads%20page.png"
+      },
+      {
+        "title": "Project overview",
+        "image": "/public/projects/businessflow-ai/project - overview page.png"
+      },
+      {
+        "title": "Document management",
+        "image": "/projects/businessflow-ai/project%20-%20documents%20page.png"
+      },
+      {
+        "title": "Sign in",
+        "image": "/public/projects/businessflow-ai/sign in page.png"
+      },
+      {
+        "title": "Sign up",
+        "image": "/public/projects/businessflow-ai/sign up page.png"
+      },
+      {
+        "title": "Global search",
+        "image": "/projects/businessflow-ai/search%20screen.png"
       }
     ],
     "architecture": {
-      "description": "This concept product is structured around a clear frontend experience, AI-powered insight generation, and service orchestration that can scale as operational needs evolve.",
+      "description": "The product combines a Next.js workspace, a Postgres-backed data model, and Gemini-based analysis to give teams a clear operational layer with secure storage, typed validation, and a human review gate around AI recommendations.",
       "items": [
         {
           "name": "Frontend",
-          "technologies": ["React", "TypeScript", "Tailwind CSS", "Next.js"]
+          "technologies": ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS", "App Router"]
         },
         {
-          "name": "AI Layer",
-          "technologies": ["Generative AI", "Prompt orchestration", "Workflow intelligence"]
+          "name": "Data & Auth",
+          "technologies": ["Supabase Auth", "PostgreSQL", "Prisma", "Supabase Storage"]
         },
         {
-          "name": "Operations",
-          "technologies": ["Business logic", "Automation", "API integration"]
+          "name": "AI & Validation",
+          "technologies": ["Google Gemini", "Zod", "Structured AI outputs", "Human approval flow"]
         }
       ]
     },
     "challenges": [
       {
-        "title": "Reducing operational noise",
-        "description": "The product had to keep decision-making context visible without creating more dashboard clutter or complexity."
+        "title": "Designing a multi-tenant workspace",
+        "description": "Every model, query, and route had to respect the active organization so records remained isolated while users moved between workspaces safely."
       },
       {
-        "title": "Balancing automation with control",
-        "description": "AI features work best when they support people, not replace their judgment. The system needed to present automation as an aid rather than an opaque black box."
+        "title": "Making AI usable without losing control",
+        "description": "The AI layer had to surface structured recommendations while preserving a review step, validation schema, and approval transaction to prevent accidental task creation."
       },
       {
-        "title": "Designing for real business workflows",
-        "description": "This required aligning product decisions to the realities of operations teams and the environments they already work in."
+        "title": "Handling secure project documents",
+        "description": "Briefs and supporting files needed private, tenant-scoped storage with upload validation and signed access to protect both the workspace and the data lifecycle."
       }
     ],
     "result": {
       "title": "The Result",
-      "description": "The concept explores a practical AI workflow product that supports real business operations without overwhelming the user with extra complexity."
+      "description": "BusinessFlow AI gives agencies a single, operationally grounded workspace where lead pipeline, project execution, document handling, and AI-assisted planning work together without overwhelming the user."
     },
     "learnings": {
       "title": "What I Learned",
-      "description": "Strong product thinking matters just as much as technical capability in AI-driven systems. The best automation experiences are grounded in real work, clear context, and trust."
+      "description": "This project reinforced that AI is most valuable when it reduces ambiguity and keeps human decision-making visible. The strongest product experiences come from pairing powerful automation with clear structure, thoughtful validation, and respect for the way teams actually work."
     }
   }
 ]

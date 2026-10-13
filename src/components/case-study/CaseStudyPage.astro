@@ -1,4 +1,6 @@
 ---
+import CaseStudyImage from "@/components/case-study/CaseStudyImage.astro";
+
 interface Feature {
   title: string;
   description: string;
@@ -68,7 +70,7 @@ interface Props {
 
 const { caseStudy } = Astro.props as Props;
 
-const hasHeroImage = Boolean(caseStudy.heroImage && caseStudy.heroImage.trim());
+const heroImage = caseStudy.heroImage?.trim() ? caseStudy.heroImage : null;
 const hasScreenshots = caseStudy.screenshots?.some(
   (screenshot: { image?: string | null }) =>
     Boolean(screenshot.image && screenshot.image.trim())
@@ -132,12 +134,13 @@ const hasScreenshots = caseStudy.screenshots?.some(
       </div>
 
       {
-        hasHeroImage && (
+        heroImage && (
           <div class="overflow-hidden rounded-2xl border border-[#ffffff10] bg-[#121212]">
-            <img
-              src={caseStudy.heroImage}
+            <CaseStudyImage
+              src={heroImage}
               alt={`${caseStudy.title} hero preview`}
-              class="h-full w-full object-cover"
+              imageClass="h-full w-full object-cover"
+              triggerClass="h-full"
               loading="eager"
             />
           </div>
@@ -233,10 +236,10 @@ const hasScreenshots = caseStudy.screenshots?.some(
           {caseStudy.features.map((feature) => (
             <article class="overflow-hidden rounded-2xl border border-[#ffffff10] bg-[#111111]">
               {feature.image && feature.image.trim() && (
-                <img
+                <CaseStudyImage
                   src={feature.image}
                   alt={feature.title}
-                  class="h-56 w-full object-cover"
+                  imageClass="h-56 w-full object-cover"
                   loading="lazy"
                 />
               )}
@@ -280,18 +283,22 @@ const hasScreenshots = caseStudy.screenshots?.some(
           <h2 class="mt-3 text-3xl font-medium text-[var(--white)] md:text-4xl">Project snapshots</h2>
         </div>
 
-        <div class="grid gap-6 lg:grid-cols-2">
+        <div class="case-study-gallery" aria-label="Project screenshots gallery">
           {caseStudy.screenshots
-            ?.filter((screenshot) => screenshot.image && screenshot.image.trim())
+            ?.filter(
+              (screenshot): screenshot is { title: string; image: string } =>
+                Boolean(screenshot.image && screenshot.image.trim()),
+            )
             .map((screenshot) => (
-              <figure class="overflow-hidden rounded-2xl border border-[#ffffff10] bg-[#111111]">
-                <img
+              <figure class="case-study-gallery__item">
+                <CaseStudyImage
                   src={screenshot.image}
                   alt={screenshot.title}
-                  class="h-full w-full object-cover"
+                  triggerClass="case-study-gallery__trigger"
+                  imageClass="case-study-gallery__image"
                   loading="lazy"
                 />
-                <figcaption class="border-t border-[#ffffff10] px-4 py-3 text-sm text-[var(--white-icon)]">
+                <figcaption class="case-study-gallery__caption">
                   {screenshot.title}
                 </figcaption>
               </figure>
@@ -385,4 +392,508 @@ const hasScreenshots = caseStudy.screenshots?.some(
       </a>
     </div>
   </section>
+
+  <dialog
+    id="case-study-lightbox"
+    class="case-study-lightbox"
+    aria-label="Enlarged case-study image"
+  >
+    <button
+      type="button"
+      class="case-study-lightbox__close"
+      aria-label="Close image"
+      data-lightbox-close
+    >
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+        <path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      </svg>
+    </button>
+    <div class="case-study-lightbox__controls" aria-label="Image zoom controls">
+      <button type="button" aria-label="Zoom out" data-zoom-out disabled>
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+          <path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+      <button type="button" aria-label="Reset zoom" data-zoom-reset disabled>
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+          <path d="M4 12a8 8 0 1 0 2.34-5.66L4 8.67M4 4v4.67h4.67" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </button>
+      <button type="button" aria-label="Zoom in" data-zoom-in disabled>
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none">
+          <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+      </button>
+    </div>
+    <img
+      class="case-study-lightbox__image"
+      data-lightbox-image
+      alt=""
+      draggable="false"
+    />
+  </dialog>
 </section>
+
+<style>
+  .case-study-gallery {
+    column-gap: clamp(0.75rem, 1.25vw, 1.25rem);
+    columns: 1;
+  }
+
+  .case-study-gallery__item {
+    display: inline-block;
+    width: 100%;
+    margin: 0 0 clamp(0.75rem, 1.25vw, 1.25rem);
+    break-inside: avoid;
+    overflow: hidden;
+    border: 1px solid var(--white-icon-tr);
+    border-radius: 1.25rem;
+    background: #111111;
+    box-shadow: 0 2px 18px rgb(0 0 0 / 10%);
+    transition: transform 180ms ease, border-color 180ms ease;
+  }
+
+  .case-study-gallery__trigger {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    background: #111111;
+  }
+
+  .case-study-gallery__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 0;
+    object-fit: contain;
+    transition: transform 180ms ease, filter 180ms ease;
+  }
+
+  .case-study-gallery__item:hover,
+  .case-study-gallery__item:focus-within {
+    border-color: rgb(255 255 255 / 18%);
+  }
+
+  .case-study-gallery__trigger:hover .case-study-gallery__image,
+  .case-study-gallery__trigger:focus-visible .case-study-gallery__image {
+    transform: scale(1.02);
+    filter: brightness(1.02);
+  }
+
+  .case-study-gallery__caption {
+    border-top: 1px solid var(--white-icon-tr);
+    padding: 0.875rem 1rem 1rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--white-icon);
+  }
+
+  @media (min-width: 640px) {
+    .case-study-gallery {
+      columns: 2;
+    }
+  }
+
+  @media (min-width: 980px) {
+    .case-study-gallery {
+      columns: 3;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .case-study-gallery__item,
+    .case-study-gallery__image,
+    .case-study-gallery__trigger {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const lightbox = document.querySelector<HTMLDialogElement>(
+    "#case-study-lightbox",
+  );
+  const lightboxImage = lightbox?.querySelector<HTMLImageElement>(
+    "[data-lightbox-image]",
+  );
+  const closeButton = lightbox?.querySelector<HTMLButtonElement>(
+    "[data-lightbox-close]",
+  );
+  const zoomInButton = lightbox?.querySelector<HTMLButtonElement>(
+    "[data-zoom-in]",
+  );
+  const zoomOutButton = lightbox?.querySelector<HTMLButtonElement>(
+    "[data-zoom-out]",
+  );
+  const resetZoomButton = lightbox?.querySelector<HTMLButtonElement>(
+    "[data-zoom-reset]",
+  );
+
+  if (
+    lightbox &&
+    lightboxImage &&
+    closeButton &&
+    zoomInButton &&
+    zoomOutButton &&
+    resetZoomButton
+  ) {
+    const minZoom = 1;
+    const maxZoom = 4;
+    const zoomStep = 1.25;
+    let zoom = minZoom;
+    let panX = 0;
+    let panY = 0;
+    let fitWidth = 0;
+    let fitHeight = 0;
+    let activeImage = false;
+    let resizeFrame = 0;
+    const pointers = new Map<number, { x: number; y: number }>();
+    let dragStart: { x: number; y: number; panX: number; panY: number } | null =
+      null;
+    let pinchDistance = 0;
+
+    let previousFocus: HTMLElement | null = null;
+    let previousBodyOverflow = "";
+    let previousRootOverflow = "";
+
+    const clampPan = () => {
+      const availableWidth = lightbox.clientWidth - 32;
+      const availableHeight = lightbox.clientHeight - 144;
+      const maxX = Math.max((fitWidth * zoom - availableWidth) / 2, 0);
+      const maxY = Math.max((fitHeight * zoom - availableHeight) / 2, 0);
+      panX = Math.max(-maxX, Math.min(maxX, panX));
+      panY = Math.max(-maxY, Math.min(maxY, panY));
+    };
+
+    const renderZoom = () => {
+      clampPan();
+      lightboxImage.style.transform = `translate(${panX}px, ${panY}px) scale(${zoom})`;
+      lightboxImage.style.cursor = zoom > minZoom ? "grab" : "zoom-in";
+      zoomInButton.disabled = zoom >= maxZoom;
+      zoomOutButton.disabled = zoom <= minZoom;
+      resetZoomButton.disabled = zoom <= minZoom;
+      lightbox.dataset.zoom = `${zoom.toFixed(2)}x`;
+    };
+
+    const resetZoom = () => {
+      zoom = minZoom;
+      panX = 0;
+      panY = 0;
+      renderZoom();
+    };
+
+    const measureFit = () => {
+      if (!activeImage || !lightboxImage.naturalWidth) return;
+
+      const maxWidth = lightbox.clientWidth - 32;
+      const maxHeight = lightbox.clientHeight - 144;
+      const scaleToFit = Math.min(
+        maxWidth / lightboxImage.naturalWidth,
+        maxHeight / lightboxImage.naturalHeight,
+        1,
+      );
+      fitWidth = lightboxImage.naturalWidth * scaleToFit;
+      fitHeight = lightboxImage.naturalHeight * scaleToFit;
+      lightboxImage.style.width = `${fitWidth}px`;
+      lightboxImage.style.height = `${fitHeight}px`;
+      resetZoom();
+    };
+
+    const zoomAt = (nextZoom: number, clientX?: number, clientY?: number) => {
+      const boundedZoom = Math.max(minZoom, Math.min(maxZoom, nextZoom));
+      if (boundedZoom === zoom) return;
+
+      if (clientX !== undefined && clientY !== undefined) {
+        const bounds = lightbox.getBoundingClientRect();
+        const offsetX = clientX - (bounds.left + bounds.width / 2);
+        const offsetY = clientY - (bounds.top + bounds.height / 2);
+        panX = offsetX - ((offsetX - panX) * boundedZoom) / zoom;
+        panY = offsetY - ((offsetY - panY) * boundedZoom) / zoom;
+      }
+
+      zoom = boundedZoom;
+      renderZoom();
+    };
+
+    const handleResize = () => {
+      cancelAnimationFrame(resizeFrame);
+      resizeFrame = requestAnimationFrame(measureFit);
+    };
+
+    document.addEventListener("click", (event) => {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+
+      const trigger = target.closest<HTMLButtonElement>(
+        "[data-case-study-image]",
+      );
+      if (trigger) {
+        const image = trigger.querySelector<HTMLImageElement>("img");
+        if (!image || lightbox.open) return;
+
+        previousFocus = trigger;
+        previousBodyOverflow = document.body.style.overflow;
+        previousRootOverflow = document.documentElement.style.overflow;
+        activeImage = true;
+        pointers.clear();
+        dragStart = null;
+
+        lightboxImage.src = image.currentSrc || image.src;
+        lightboxImage.alt = image.alt;
+        document.body.style.overflow = "hidden";
+        document.documentElement.style.overflow = "hidden";
+        lightbox.showModal();
+        window.addEventListener("resize", handleResize);
+        closeButton.focus();
+        if (lightboxImage.complete) measureFit();
+        return;
+      }
+
+      if (target === lightbox) lightbox.close();
+    });
+
+    lightbox.addEventListener("close", () => {
+      activeImage = false;
+      pointers.clear();
+      dragStart = null;
+      lightboxImage.style.transform = "";
+      lightboxImage.style.width = "";
+      lightboxImage.style.height = "";
+      zoom = minZoom;
+      panX = 0;
+      panY = 0;
+      zoomInButton.disabled = true;
+      zoomOutButton.disabled = true;
+      resetZoomButton.disabled = true;
+      delete lightbox.dataset.zoom;
+      cancelAnimationFrame(resizeFrame);
+      window.removeEventListener("resize", handleResize);
+      document.body.style.overflow = previousBodyOverflow;
+      document.documentElement.style.overflow = previousRootOverflow;
+      previousFocus?.focus({ preventScroll: true });
+      previousFocus = null;
+    });
+    lightboxImage.addEventListener("load", measureFit);
+    lightboxImage.addEventListener("load", measureFit);
+
+    document.addEventListener("keydown", (event) => {
+      if (!lightbox.open) return;
+
+      if (event.key === "Escape") {
+        event.preventDefault();
+        lightbox.close();
+        return;
+      }
+
+      const target = event.target;
+      const isEditing =
+        target instanceof HTMLElement &&
+        (target.isContentEditable ||
+          target instanceof HTMLInputElement ||
+          target instanceof HTMLTextAreaElement ||
+          target instanceof HTMLSelectElement);
+      if (isEditing) return;
+
+      if (event.key === "+" || event.key === "=") {
+        event.preventDefault();
+        zoomAt(zoom * zoomStep);
+      } else if (event.key === "-") {
+        event.preventDefault();
+        zoomAt(zoom / zoomStep);
+      } else if (event.key === "0") {
+        event.preventDefault();
+        resetZoom();
+      }
+    });
+
+    closeButton.addEventListener("click", () => lightbox.close());
+    zoomInButton.addEventListener("click", () => zoomAt(zoom * zoomStep));
+    zoomOutButton.addEventListener("click", () => zoomAt(zoom / zoomStep));
+    resetZoomButton.addEventListener("click", resetZoom);
+
+    lightboxImage.addEventListener(
+      "wheel",
+      (event) => {
+        event.preventDefault();
+        zoomAt(
+          event.deltaY < 0 ? zoom * zoomStep : zoom / zoomStep,
+          event.clientX,
+          event.clientY,
+        );
+      },
+      { passive: false },
+    );
+
+    lightboxImage.addEventListener("pointerdown", (event) => {
+      if (event.pointerType === "mouse" && event.button !== 0) return;
+      event.preventDefault();
+      lightboxImage.setPointerCapture(event.pointerId);
+      pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+
+      if (pointers.size === 1 && zoom > minZoom) {
+        dragStart = { x: event.clientX, y: event.clientY, panX, panY };
+        lightboxImage.classList.add("is-dragging");
+      } else if (pointers.size === 2) {
+        const [first, second] = [...pointers.values()];
+        pinchDistance = Math.hypot(second.x - first.x, second.y - first.y);
+        dragStart = null;
+      }
+    });
+
+    lightboxImage.addEventListener("pointermove", (event) => {
+      if (!pointers.has(event.pointerId)) return;
+      pointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+
+      if (pointers.size >= 2) {
+        const [first, second] = [...pointers.values()];
+        const distance = Math.hypot(second.x - first.x, second.y - first.y);
+        if (pinchDistance > 0) {
+          const midpointX = (first.x + second.x) / 2;
+          const midpointY = (first.y + second.y) / 2;
+          zoomAt(
+            zoom * (distance / pinchDistance),
+            midpointX,
+            midpointY,
+          );
+        }
+        pinchDistance = distance;
+      } else if (dragStart && zoom > minZoom) {
+        panX = dragStart.panX + event.clientX - dragStart.x;
+        panY = dragStart.panY + event.clientY - dragStart.y;
+        renderZoom();
+      }
+    });
+
+    const finishPointer = (event: PointerEvent) => {
+      pointers.delete(event.pointerId);
+      if (pointers.size < 2) pinchDistance = 0;
+      if (pointers.size === 0) {
+        dragStart = null;
+        lightboxImage.classList.remove("is-dragging");
+      } else if (pointers.size === 1 && zoom > minZoom) {
+        const [remaining] = [...pointers.values()];
+        dragStart = {
+          x: remaining.x,
+          y: remaining.y,
+          panX,
+          panY,
+        };
+      }
+    };
+
+    lightboxImage.addEventListener("pointerup", finishPointer);
+    lightboxImage.addEventListener("pointercancel", finishPointer);
+  }
+</script>
+
+<style>
+  .case-study-lightbox {
+    position: fixed;
+    inset: 0;
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 4.5rem 1rem 6.5rem;
+    border: 0;
+    background: transparent;
+    color: var(--white);
+    place-items: center;
+    overflow: hidden;
+  }
+
+  .case-study-lightbox[open] {
+    display: grid;
+  }
+
+  .case-study-lightbox::backdrop {
+    background: rgb(0 0 0 / 88%);
+  }
+
+  .case-study-lightbox__image {
+    display: block;
+    object-fit: contain;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    transition: transform 140ms ease-out;
+  }
+
+  .case-study-lightbox__image.is-dragging {
+    cursor: grabbing !important;
+    transition: none;
+  }
+
+  .case-study-lightbox__controls {
+    position: fixed;
+    z-index: 1;
+    bottom: 1rem;
+    left: 50%;
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    transform: translateX(-50%);
+    border: 1px solid var(--white-icon-tr);
+    border-radius: 9999px;
+    background: #171717;
+    box-shadow: 0 8px 30px rgb(0 0 0 / 35%);
+  }
+
+  .case-study-lightbox__controls button {
+    display: grid;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0.7rem;
+    place-items: center;
+    border: 1px solid transparent;
+    border-radius: 9999px;
+    background: transparent;
+    color: var(--white);
+    cursor: pointer;
+  }
+
+  .case-study-lightbox__controls button:hover:not(:disabled) {
+    border-color: var(--white-icon-tr);
+    background: #292929;
+  }
+
+  .case-study-lightbox__controls button:disabled {
+    color: var(--white-icon);
+    cursor: not-allowed;
+    opacity: 0.45;
+  }
+
+  .case-study-lightbox__controls svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .case-study-lightbox__close {
+    position: fixed;
+    z-index: 1;
+    top: 1rem;
+    right: 1rem;
+    display: grid;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0.7rem;
+    place-items: center;
+    border: 1px solid var(--white-icon-tr);
+    border-radius: 9999px;
+    background: #171717;
+    color: var(--white);
+    cursor: pointer;
+  }
+
+  .case-study-lightbox__close:hover {
+    background: #292929;
+  }
+
+  .case-study-lightbox__close svg {
+    width: 100%;
+    height: 100%;
+  }
+</style>

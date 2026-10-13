@@ -1,0 +1,37 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  imageClass: string;
+  triggerClass?: string;
+  loading?: "eager" | "lazy";
+}
+
+const {
+  src,
+  alt,
+  imageClass,
+  triggerClass = "",
+  loading = "lazy",
+} = Astro.props;
+---
+
+<button
+  type="button"
+  class:list={["case-study-image-trigger block w-full", triggerClass]}
+  data-case-study-image
+  aria-label={`Enlarge image: ${alt}`}
+>
+  <img src={src} alt={alt} class={imageClass} loading={loading} />
+</button>
+
+<style>
+  .case-study-image-trigger {
+    border: 0;
+    padding: 0;
+    background: transparent;
+    color: inherit;
+    text-align: inherit;
+    cursor: zoom-in;
+  }
+</style>
